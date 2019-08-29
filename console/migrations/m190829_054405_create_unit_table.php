@@ -3,18 +3,18 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%food}}`.
+ * Handles the creation of table `{{%unit}}`.
  */
-class m190829_050646_create_food_table extends Migration
+class m190829_054405_create_unit_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%food}}', [
+        $this->createTable('{{%unit}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(64),          
+            'name' => $this->string(64)->notNull(),
         ]);
     }
 
@@ -23,6 +23,6 @@ class m190829_050646_create_food_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%food}}');
+        $this->dropTable('{{%unit}}');
     }
 }

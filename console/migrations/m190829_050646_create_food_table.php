@@ -14,7 +14,7 @@ class m190829_050646_create_food_table extends Migration
     {
         $this->createTable('{{%food}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(64),          
+            'name' => $this->string(64)->notNull(),          
         ]);
     }
 

@@ -14,10 +14,10 @@ class m190829_054453_create_food_nutrient_table extends Migration
     {
         $this->createTable('{{%food_nutrient}}', [
             'id' => $this->primaryKey(),
-            'id_food' => $this->integer()->notNull(),
-            'id_nutrient' => $this->integer()->notNull(),
+            'food_id' => $this->integer()->notNull(),
+            'nutrient_id' => $this->integer()->notNull(),
             'amount' => $this->float()->notNull(),
-            'id_unit' => $this->integer()->notNull(),
+            'unit_id' => $this->integer()->notNull(),
         ]);
     }
 

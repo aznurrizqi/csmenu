@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%unit}}`.
+ * Handles the creation of table `{{%on_deficiency_category}}`.
  */
-class m190829_054405_create_unit_table extends Migration
+class m190903_073123_create_on_deficiency_category_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%unit}}', [
+        $this->createTable('{{%on_deficiency_category}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(64)->notNull(),
         ]);
@@ -23,6 +23,6 @@ class m190829_054405_create_unit_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%unit}}');
+        $this->dropTable('{{%on_deficiency_category}}');
     }
 }

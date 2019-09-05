@@ -10,10 +10,10 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Foods');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="food-index box box-primary">
+<div class="food-index box box-default">
     <?php Pjax::begin(); ?>
-    <div class="box-header with-border">
-        <?= Html::a(Yii::t('app', 'Create Food'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+    <div class="box-header with-border text-right">
+        <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> Create Food'), ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
+                //'id',
                 'name',
 
                 ['class' => 'yii\grid\ActionColumn'],

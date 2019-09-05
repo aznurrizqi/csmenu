@@ -5,11 +5,34 @@ namespace backend\controllers;
 use Yii;
 use backend\models\NutrientOnDeficiency;
 use backend\models\NutrientOnDeficiencySearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
-class NutrientOnDeficiencyController extends BaseController
+/**
+ * NutrientOnDeficiencyController implements the CRUD actions for NutrientOnDeficiency model.
+ */
+class NutrientOnDeficiencyController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
+    /**
+     * Lists all NutrientOnDeficiency models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new NutrientOnDeficiencySearch();
@@ -21,6 +44,11 @@ class NutrientOnDeficiencyController extends BaseController
         ]);
     }
 
+    /**
+     * Displays a single NutrientOnDeficiency model.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -28,12 +56,17 @@ class NutrientOnDeficiencyController extends BaseController
         ]);
     }
 
+    /**
+     * Creates a new NutrientOnDeficiency model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new NutrientOnDeficiency();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -41,12 +74,18 @@ class NutrientOnDeficiencyController extends BaseController
         }
     }
 
+    /**
+     * Updates an existing NutrientOnDeficiency model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -54,6 +93,12 @@ class NutrientOnDeficiencyController extends BaseController
         }
     }
 
+    /**
+     * Deletes an existing NutrientOnDeficiency model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -61,6 +106,13 @@ class NutrientOnDeficiencyController extends BaseController
         return $this->redirect(['index']);
     }
 
+    /**
+     * Finds the NutrientOnDeficiency model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return NutrientOnDeficiency the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     protected function findModel($id)
     {
         if (($model = NutrientOnDeficiency::findOne($id)) !== null) {

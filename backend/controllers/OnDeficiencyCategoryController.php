@@ -5,11 +5,34 @@ namespace backend\controllers;
 use Yii;
 use backend\models\OnDeficiencyCategory;
 use backend\models\OnDeficiencyCategorySearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
-class OnDeficiencyCategoryController extends BaseController
+/**
+ * OnDeficiencyCategoryController implements the CRUD actions for OnDeficiencyCategory model.
+ */
+class OnDeficiencyCategoryController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
+    /**
+     * Lists all OnDeficiencyCategory models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new OnDeficiencyCategorySearch();
@@ -21,6 +44,11 @@ class OnDeficiencyCategoryController extends BaseController
         ]);
     }
 
+    /**
+     * Displays a single OnDeficiencyCategory model.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -28,12 +56,17 @@ class OnDeficiencyCategoryController extends BaseController
         ]);
     }
 
+    /**
+     * Creates a new OnDeficiencyCategory model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new OnDeficiencyCategory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -41,12 +74,18 @@ class OnDeficiencyCategoryController extends BaseController
         }
     }
 
+    /**
+     * Updates an existing OnDeficiencyCategory model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -54,6 +93,12 @@ class OnDeficiencyCategoryController extends BaseController
         }
     }
 
+    /**
+     * Deletes an existing OnDeficiencyCategory model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -61,6 +106,13 @@ class OnDeficiencyCategoryController extends BaseController
         return $this->redirect(['index']);
     }
 
+    /**
+     * Finds the OnDeficiencyCategory model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return OnDeficiencyCategory the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     protected function findModel($id)
     {
         if (($model = OnDeficiencyCategory::findOne($id)) !== null) {

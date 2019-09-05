@@ -8,7 +8,7 @@ namespace backend\models;
  * @property integer $id
  * @property integer $foodId
  * @property integer $nutrientId
- * @property float $amount
+ * @property double $amount
  * @property integer $unitId
  */
 
@@ -21,7 +21,7 @@ class FoodNutrient extends \yii\db\ActiveRecord {
         return [
             [['foodId', 'nutrientId', 'amount', 'unitId'], 'required'],
             [['foodId', 'nutrientId', 'unitId'], 'integer'],
-            ['amount', 'float'],
+            ['amount', 'number'],
         ];
     }
     

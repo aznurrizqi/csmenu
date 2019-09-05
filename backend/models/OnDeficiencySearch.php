@@ -2,52 +2,69 @@
 
 namespace backend\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use backend\models\OnDeficiency;
 
+/**
+ * OnDeficiencySearch represents the model behind the search form of `backend\models\OnDeficiency`.
+ */
 class OnDeficiencySearch extends OnDeficiency
 {
-    public $category;
-    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['onDeficiencyCategoryId', 'description'], 'safe'],
+            [['id', 'on_deficiency_category_id'], 'integer'],
+            [['description'], 'safe'],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function scenarios()
     {
+        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
     public function search($params)
     {
         $query = OnDeficiency::find();
-        $query->joinWith('onDeficiencyCategory');
-        
+
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        		'sort' => [
-        				'defaultOrder' => [
-        						'id' => SORT_ASC,
-        				]
-        		],
+            'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'on_deficiency_category_id' => $this->on_deficiency_category_id,
         ]);
 
-        $query->andFilterWhere(['like', 'description', $this->description])
-        ->andFilterWhere(['like', 'on_deficiency_category.name', $this->category]);
+        $query->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

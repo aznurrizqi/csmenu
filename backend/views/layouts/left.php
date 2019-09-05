@@ -32,8 +32,14 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     // ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                    // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Food', 'icon' => 'dashboard', 'url' => ['/food']],
+                    ['label' => 'Nutrient', 'icon' => 'dashboard', 'url' => ['/nutrient']],
+                    ['label' => 'Food Nutrient', 'icon' => 'dashboard', 'url' => ['/food-nutrient']],
+                    ['label' => 'On Deficiency Category', 'icon' => 'dashboard', 'url' => ['/on-deficiency-category']],
+                    ['label' => 'On Deficiency', 'icon' => 'dashboard', 'url' => ['/on-deficiency']],
+                    ['label' => 'Nutrient On Deficiency', 'icon' => 'dashboard', 'url' => ['/nutrient-on-deficiency']],
                     /* ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Some tools',
